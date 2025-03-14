@@ -5,6 +5,10 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     padding: '10% 0',
+    // position: 'sticky',
+    // top: 0,
+    // zIndex: 10,
+    // backgroundColor: theme.palette.background.default
   },
   image: {
     width: '70%'
@@ -15,5 +19,5 @@ export default makeStyles((theme) => ({
   },
   genreImage: {
     filter: theme.palette.mode === 'dark' ? 'dark' : 'invert(1)',
-  }
+  },
 }));
