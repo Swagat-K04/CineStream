@@ -7,7 +7,6 @@ import { MovieList } from '..';
 
 const Movies = () => {
   const { data, error, isFetching } = useGetMoviesQuery();
-  console.log(data);
   
   if(isFetching) {
     return (
