@@ -20,6 +20,7 @@ const blueLogo = '/logo-blue.png';
 
 const Sidebar = ({ setMobileOpen }) => {
   const theme = useTheme();
+  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
   const classes = useStyles();
   const { data, isFetching } = useGetGenresQuery();
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const Sidebar = ({ setMobileOpen }) => {
         <img 
           className={classes.image}
           src={theme.palette.mode === 'light' ? blueLogo : redLogo}
-          alt='CineStream logo'
+          alt='CineStream Logo'
         />
       </Link>
       <Divider />
