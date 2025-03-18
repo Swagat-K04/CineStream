@@ -22,7 +22,7 @@ const Sidebar = ({ setMobileOpen }) => {
   const theme = useTheme();
   const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
   const classes = useStyles();
-  const { data, isFetching } = useGetGenresQuery();
+  const { data, isFetching } = useGetGenresQuery(); 
   const dispatch = useDispatch();
 
   return (
