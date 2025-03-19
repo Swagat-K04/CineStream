@@ -10,7 +10,7 @@ import useStyles from './styles';
 import { useGetMovieQuery } from '../../services/TMDB';
 import genreIcons from '../../assets/genres';
 import { useGetRecommendationsQuery } from '../../services/TMDB';
-import { MovieList } from '..'
+import { MovieList } from '..';
 
 const MovieInformation = () => {
   const { id } = useParams();
@@ -22,10 +22,10 @@ const MovieInformation = () => {
   const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ movie_id: id, list: 'recommendations' });
 
   const isMovieFavorited = false;
-  const isMovieWatchlisted= false;
+  const isMovieWatchlisted = false;
 
   const addToFavorites = () => {
-    
+
   };
   const addToWatchlist = () => {
 
@@ -114,14 +114,14 @@ const MovieInformation = () => {
         </Grid>
         <Grid container style={{ marginTop: '2rem' }}>
           <div className={classes.buttonsContainer}>
-            <Grid size={{ xs: 12, sm: 6}} className={classes.buttonsContainer}>
+            <Grid size={{ xs: 12, sm: 6 }} className={classes.buttonsContainer}>
               <ButtonGroup size="medium" variant="outlined">
                 <Button target="blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>Website</Button>
                 <Button target="blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>IMDB</Button>
                 <Button onClick={() => setOpen(true)} href="#" endIcon={<Theaters />}>Trailer</Button>
               </ButtonGroup>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6}} className={classes.buttonsContainer}>
+            <Grid size={{ xs: 12, sm: 6 }} className={classes.buttonsContainer}>
               <ButtonGroup size="medium" variant="outlined">
                 <Button onClick={addToFavorites} endIcon={isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}>
                   {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
@@ -148,13 +148,13 @@ const MovieInformation = () => {
           : <Box>Sorry, nothing was found.</Box>
         }
       </Box>
-      <Modal
-        closeAfterTransition
-        className={classes.modal}
-        open={open}
-        onClose={() => {setOpen(false)}}
-      >
-        {data?.videos?.results?.length > 0 && (
+      {data?.videos?.results?.length > 0 && (
+        <Modal
+          closeAfterTransition
+          className={classes.modal}
+          open={open}
+          onClose={() => setOpen(false)}
+        >
           <iframe
             autoPlay
             className={classes.video}
@@ -162,8 +162,8 @@ const MovieInformation = () => {
             src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
             allow="autoplay"
           />
-        )} 
-      </Modal>
+        </Modal>
+      )}
     </Grid>
   )
 }
