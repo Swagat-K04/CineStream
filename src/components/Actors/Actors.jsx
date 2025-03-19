@@ -1,20 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Grid2 as Grid, Box, CircularProgress, Typography, Button } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
 
 import { useGetActorDetailsQuery, useGetMoviesByActorIdQuery } from '../../services/TMDB';
 import useStyles from './styles';
-import { MovieList } from '..';
+import { MovieList, Pagination } from '..';
 
 const Actors = () => {
   const classes = useStyles();
   const { id } = useParams();
   const navigate = useNavigate();
-  const page = 1;
+  const [page, setPage] = useState(1);
 
   const { data, isFetching, error } = useGetActorDetailsQuery(id);
-  const { data: movies } = useGetMoviesByActorIdQuery({id, page})
+  const { data: movies } = useGetMoviesByActorIdQuery({ id, page })
 
   if (isFetching) {
     return (
@@ -63,11 +63,12 @@ const Actors = () => {
             </Button>
           </Box>
         </Grid>
-        <Box margin="2rem 0">
-          <Typography variant="h3" gutterBottom align="center">Movies</Typography>
-          {movies && <MovieList movies={movies} numberOfMovies={12} />}
-        </Box>
       </Grid>
+      <Box margin="2rem 0">
+        <Typography variant="h3" gutterBottom align="center">Movies</Typography>
+        {movies && <MovieList movies={movies} numberOfMovies={12} />}
+        <Pagination currentPage={page} setPage={setPage} totalPages={movies?.total_pages} />
+      </Box>
     </>
   )
 }
