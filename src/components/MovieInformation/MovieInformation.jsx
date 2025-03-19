@@ -9,13 +9,16 @@ import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 import useStyles from './styles';
 import { useGetMovieQuery } from '../../services/TMDB';
 import genreIcons from '../../assets/genres';
-
+import { useGetRecommendationsQuery } from '../../services/TMDB';
+import { MovieList } from '..'
 
 const MovieInformation = () => {
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ movie_id: id, list: 'recommendations' });
 
   const isMovieFavorited = false;
   const isMovieWatchlisted= false;
@@ -135,6 +138,15 @@ const MovieInformation = () => {
           </div>
         </Grid>
       </Grid>
+      <Box marginTop="5rem" width="100%">
+        <Typography variant="h3" gutterBottom="true" align="center">
+          You might also like
+        </Typography>
+        {recommendations
+          ? <MovieList movies={recommendations} numberOfMovies={12} />
+          : <Box>Sorry, nothing was found.</Box>
+        }
+      </Box>
     </Grid>
   )
 }
